@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Permanent+Marker&family=Sedgwick+Ave&display=swap');
+
+.home-body {
+    background-color: #f7e0bd;
+    align-items: center;
+    text-align: center;
+    font-family: 'Permanent Marker', cursive;
+    color: #575656;
+}
+h1 {
+    padding-top: 7%;
+    font-size: 350%;
+    color: rgb(14, 108, 151);
+    padding-bottom: 7%;
+}
+
+.private {
+    font-size: larger;
+    color: rgb(9, 140, 248);
+}
+
+.safe {
+    font-size: larger;
+    color: green;
+}
+
+.to-join {
+    font-family: 'Gloria Hallelujah', cursive;
+    padding-top: 5%;
+}
+
+.label-text {
+    font-size: small;
+    background-color: rgb(51, 184, 69);
+}
+
+.warn {
+    font-size: small;
+    color: red;
+    padding-bottom: 1%;
+}
+
+.no-room-id {
+    padding-top: 1em;
+    margin: auto;
+    width: 60%;
+    font-size: 0.6em;
+    color: rgb(12, 73, 0);
+}
+
+.generate {
+    margin-top: 1rem;
+    margin-bottom: 50px;
+}
+
+.inside-pop-up {
+    background-color: #f7e0bd;
+    margin: auto;
+    width: 80%;
+}
+
+.popup-content {
+    font-family: 'Sedgwick Ave', cursive !important;
+    padding: 10px !important;
+    background-color: #f7e0bd !important;
+    border: 0px !important;
+    border-radius: 30px !important;
+    width: 300px !important;
+}
+
+.popup-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+
+.popup-name {
+    font-size: 0.8em;
+    margin-bottom: 10px;
+
+}
+
+.popup-submit {
+    font-size: small;
+}

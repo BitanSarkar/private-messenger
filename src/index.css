@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+  background-color: #f7e0bd;
+  font-family: 'Fira Sans Extra Condensed', sans-serif
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+html {
+  background-color:#f7e0bd;
+}

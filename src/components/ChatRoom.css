@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+
+.chat-design{
+    font-family: 'Architects Daughter', cursive;
+    background-color: #f7e0bd;
+    padding: 50px;
+}
+
+.button-send {
+    margin-top: auto;
+    height: 60px;
+    width: 10%;
+    padding: 7px;
+    margin-right: 1em !important;
+}
+
+.attach-send {
+    margin-top: auto;
+    height: 50px;
+    width: 10%;
+    margin-left: 0.4em !important;
+    margin-right: 0.2em !important;
+    padding: 5px;
+}
+
+.button-send:hover {
+    margin-top: auto;
+    height: 60px;
+    width: 13%;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.send-text {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 0px;
+}
+
+.send {
+    margin-left: 2em !important;
+    padding: 5px;
+    min-height: 2vh;
+    max-height: 25vh;
+    overflow-y: scroll;
+    width: 75%;
+    background-color: #ffffff;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: scroll;
+}
+
+.messages-container {
+    position: fixed;
+    margin-top: 5%;
+    width: 80%;
+    height: 68%;
+    margin-left: -2.667%;
+    overflow-y: scroll;
+}
+
+
+.delete-room {
+    font-size: 0.6em;
+    margin-top: -10px;
+}

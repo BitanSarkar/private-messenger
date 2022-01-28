@@ -1,0 +1,46 @@
+.others {
+    background-color: rgba(109, 192, 240, 0.685);
+    padding: 5px;
+    border-radius: 0.5em;
+    margin-bottom: 2px;
+    width: 70%;
+}
+
+.me {
+    background-color: rgba(102, 165, 82, 0.603);
+    margin-bottom: 2px;
+    padding: 5px;
+    border-radius: 0.5em;
+    width: 70%;
+    margin-left: 30%;
+}
+
+.name-container {
+    font-size: smaller;
+    text-shadow: 2em;
+    margin-bottom: 0.5em;
+    font-weight: bolder;
+    word-break: break-all;
+}
+
+.message-container {
+    font-size: small;
+    word-break: break-all;
+}
+
+.image-container {
+    margin-left: 1em;
+    width: 70%;
+}
+
+.audio-container {
+    margin-left: 1em;
+    width: 70%;
+}
+
+.time-container {
+    margin-top: 1em;
+    margin-left: 85%;
+    font-size: 0.6em;
+    font-weight: bolder;
+}
