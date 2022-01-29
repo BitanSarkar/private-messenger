@@ -26,7 +26,7 @@ const CustomChat = ({name, message, chatName, time, fileUrl, fileName, type, roo
             <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'   style={{fontSize:"0.65em"}}>download</a>
         </div>:<></>}
         {message==="" && type!==null && type.split('/')[0]!=='video' && type.split('/')[0]!=='audio' && type.split('/')[0]!=='image'?<div className="audio-container">
-            <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'  >{fileName}</a>
+            <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'  >{`${fileName.substring(0,3)}...${fileName.substring(0,3).split('.')[1]}`}</a>
         </div>:<></>}
         <div className="time-container">{time}</div>
         </div>)
@@ -48,7 +48,7 @@ const CustomChat = ({name, message, chatName, time, fileUrl, fileName, type, roo
             <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'   style={{fontSize:"0.65em"}}>download</a>
         </div>:<></>}
         {message==="" && type!==null && type.split('/')[0]!=='video' && type.split('/')[0]!=='audio' && type.split('/')[0]!=='image'?<div className="audio-container">
-            <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'  >{fileName}</a>
+            <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'  >{`${fileName.substring(0,3)}...${fileName.substring(0,3).split('.')[1]}`}</a>
         </div>:<></>}
         <div className="time-container">{time}</div>
         </div>)
