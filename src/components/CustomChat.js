@@ -1,6 +1,7 @@
 import useWindowDimensions from '../utility/WindowDim';
 import './CustomChat.css'
 import { baseUrl } from '../constants';
+import Linkify from 'react-linkify';
 
 const CustomChat = ({name, message, chatName, time, fileUrl, fileName, type, roomId}) => {
 
@@ -12,7 +13,12 @@ const CustomChat = ({name, message, chatName, time, fileUrl, fileName, type, roo
         <div className="name-container">{name.substring(0,name.length - 20)+" - "}
             <span style={{fontSize:"0.7em", marginLeft: "10px", wordBreak: "break-all"}}>{name.substring(name.length - 20, name.length)}</span>
         </div>
-        <div className="message-container">{message}</div>
+        <div className="message-container"><Linkify componentDecorator={(decoratedHref, decoratedText, key) => (
+                                                        <a target="_blank" href={decoratedHref} key={key}>
+                                                            {decoratedText}
+                                                        </a>
+                                                    )}
+                                                >{message}</Linkify></div>
         {message==="" && type.split('/')[0]==='image'?<div className="image-container">
             <img   src={fileUrl} alt="Images" width={0.45*width}/>
             <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'   style={{fontSize:"0.65em"}}>download</a>
@@ -34,7 +40,12 @@ const CustomChat = ({name, message, chatName, time, fileUrl, fileName, type, roo
         return (<div     className="me" >
         <div className="name-container">{name.substring(0,name.length - 20)+" - "}
             <span style={{fontSize:"0.7em", marginLeft: "10px", wordBreak: "break-all"}}>{name.substring(name.length - 20, name.length)}</span></div>
-        <div className="message-container">{message}</div>
+        <div className="message-container"><Linkify componentDecorator={(decoratedHref, decoratedText, key) => (
+                                                        <a target="_blank" href={decoratedHref} key={key}>
+                                                            {decoratedText}
+                                                        </a>
+                                                    )}
+                                                >{message}</Linkify></div>
         {message==="" && type.split('/')[0]==='image'?<div className="image-container">
             <img   src={fileUrl} alt="Images" width={0.45*width}/>
             <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'   style={{fontSize:"0.65em"}}>download</a>
