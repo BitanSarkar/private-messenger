@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import { baseUrl } from "../constants";
 import SockJsClient from 'react-stomp';
@@ -17,6 +17,12 @@ import axios from "axios";
 const ChatRoom = () => {
     const location = useLocation();
     const history = useHistory();
+
+    const AlwaysScrollToBottom = () => {
+        const elementRef = useRef();
+        useEffect(() => elementRef.current.scrollIntoView());
+        return <div ref={elementRef} />;
+      };
     var roomid = "";
     var owner = false;
     try {
@@ -108,8 +114,6 @@ const ChatRoom = () => {
                     NotificationManager.info(`You got message from ${msg.message.name.substring(0,msg.message.name.length - 20)}`)
             }
             setAllMessages([...allMessages, msg.message])
-            var element = document.getElementById("message-container");
-            element.scrollTop=element.scrollHeight;
         }
     }
 
@@ -125,6 +129,23 @@ const ChatRoom = () => {
                 <NotificationContainer/>
                 <div className="aaaa">
                     <div className="row">
+                        <Box position="relative" display={upload===0?"none":"inline-flex"}>
+                            uploading ...
+                            <CircularProgress variant="determinate" 
+                            value={upload} />
+                                <Box
+                                    bottom={0}
+                                    right={0}
+                                    top={0}
+                                    justifyContent="center"
+                                    left={0}
+                                    display="flex"
+                                    alignItems="center"
+                                    position="absolute"
+                                    >
+                                    {`${upload}%`}
+                                </Box>
+                        </Box>
                         <div className="col-8">Room ID : {roomId}</div>
                         <div className="col-4">{owner?<button className="btn btn-primary delete-room" onClick={deleteRoom}> Delete Room</button>:<></>}</div>
                     </div>
@@ -133,6 +154,7 @@ const ChatRoom = () => {
                         {allMessages.map( m => 
                             <CustomChat key={Math.floor(Math.random()*10000000)} name={m.name} message={m.message} chatName={localStorage.getItem("name")} time={m.timeStamp} fileUrl={m.fileUrl} fileName={m.fileName} type={m.type} roomId={roomId}/>
                         )}
+                        <AlwaysScrollToBottom />
                     </div>
 
 
@@ -177,22 +199,6 @@ const ChatRoom = () => {
                             }}
                         />
                     </Popup>
-                    <Box position="relative" display={upload===0?"none":"inline-flex"}>
-                        <CircularProgress variant="determinate" 
-                          value={upload} />
-                            <Box
-                                bottom={0}
-                                right={0}
-                                top={0}
-                                justifyContent="center"
-                                left={0}
-                                display="flex"
-                                alignItems="center"
-                                position="absolute"
-                                >
-                                {`${upload}%`}
-                            </Box>
-                    </Box>
                     <div className="input-group mb-3 send-text">
                         <input type="text" className="form-control send" placeholder="Write your message" onChange={(e)=>setMessageToBeSent(e.target.value)} value={messageToBeSent}/>
                         <img src={attach} alt="attach" onClick={()=>setAttachment(true)} className="attach-send"/>
