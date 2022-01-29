@@ -9,6 +9,10 @@ import Popup from "reactjs-popup";
 import CustomChat from "./CustomChat";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import Box from '@material-ui/core/Box';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import axios from "axios";
+
 
 const ChatRoom = () => {
     const location = useLocation();
@@ -27,6 +31,7 @@ const ChatRoom = () => {
     const [sessionExpired, setSessionExpired] = useState(false);
     const [attachment, setAttachment] = useState(false);
     const [allMessages,setAllMessages] = useState([]);
+    const [upload,setUpload] = useState(0);
 
     const sendMessage = () => {
         if(messageToBeSent !== ""){
@@ -126,7 +131,7 @@ const ChatRoom = () => {
 
                     <div className="messages-container" id="message-container"> 
                         {allMessages.map( m => 
-                            <CustomChat key={Math.floor(Math.random()*10000000)} name={m.name} message={m.message} chatName={localStorage.getItem("name")} time={m.timeStamp} imageUrl={m.imageUrl} audioUrl={m.audioUrl} type={m.type}/>
+                            <CustomChat key={Math.floor(Math.random()*10000000)} name={m.name} message={m.message} chatName={localStorage.getItem("name")} time={m.timeStamp} fileUrl={m.fileUrl} fileName={m.fileName} type={m.type} roomId={roomId}/>
                         )}
                     </div>
 
@@ -135,63 +140,59 @@ const ChatRoom = () => {
                     <Popup className="pop-up-chat" open={sessionExpired} closeOnDocumentClick={false} position="center">
                         Your Session Has been expired, <a href="/">click here</a> to goto Home Page
                     </Popup>
+                    
                     <Popup className="pop-up" open={attachment} closeOnDocumentClick={false} position="center">
                         <input
                             type="file"
                             onChange={(e) => {
                                 setAttachment(false)
-                                if(e.target.files[0].type.split('/')[0]==='image'){
-                                    const imageData = new FormData();
-                                    imageData.append("name", localStorage.getItem("name"));
-                                    imageData.append("image", e.target.files[0]);
-                                    imageData.append("type", e.target.files[0].type);
-                                    fetch(baseUrl + "/chat/"+roomId+"/photos", {
-                                        headers: {
-                                            'Time-Zone': new Date().toString().split(' ')[5]
-                                        },
-                                        method: "POST",
-                                        body: imageData
-                                    })
-                                    .then(response => {
-                                        if(response.ok){
-                                            NotificationManager.success('Image added successfully', '');
-                                        }
-                                        else
-                                            throw new Error("Image upload failed")
-                                    })
-                                    .catch(e=>{
-                                        NotificationManager.warning('Some error happed', '', 1000)
-                                    })
-                                }
-                                else if(e.target.files[0].type.split('/')[0]==='audio') {
-                                    const imageData = new FormData();
-                                    imageData.append("name", localStorage.getItem("name"));
-                                    imageData.append("audio", e.target.files[0]);
-                                    imageData.append("type", e.target.files[0].type);
-                                    fetch(baseUrl + "/chat/"+roomId+"/audio", {
-                                        headers: {
-                                            'Time-Zone': new Date().toString().split(' ')[5]
-                                        },
-                                        method: "POST",
-                                        body: imageData
-                                    })
-                                    .then(response => {
-                                        if(response.ok){
-                                            NotificationManager.success('Audio added successfully', '');
-                                        }
-                                        else
-                                            throw new Error("Audio upload failed")
-                                    })
-                                    .catch(e=>{
-                                        NotificationManager.warning('Some error happed', '', 1000)
-                                    })
-                                }
-                                else {
-                                    NotificationManager.warning('Unsupported media type', 'You can upload images only', 3000)
-                                }
+                                const fileData = new FormData();
+                                const extA = e.target.files[0].name.split('.');
+                                fileData.append("name", localStorage.getItem("name"));
+                                fileData.append("file", e.target.files[0]);
+                                fileData.append("type", e.target.files[0].type);
+                                fileData.append("ext", extA[extA.length-1]);
+                                axios.request({
+                                    url: baseUrl + "/chat/"+roomId+"/file-upload",
+                                    method: "POST",
+                                    headers: {
+                                        'Time-Zone': new Date().toString().split(' ')[5]
+                                    },
+                                    data: fileData,
+                                    onUploadProgress: (uploadedData) => {
+                                        setUpload(Math.round((uploadedData.loaded*100)/uploadedData.total));
+                                    }
+                                })
+                                .then(response => {
+                                    if(response.status === 200){
+                                        NotificationManager.success('File added successfully', '');
+                                    }
+                                    else
+                                        throw new Error("File upload failed")
+                                    setUpload(0);
+                                })
+                                .catch(e=>{
+                                    NotificationManager.warning('Some error happed', '', 1000)
+                                })
                             }}
                         />
                     </Popup>
+                    <Box position="relative" display={upload===0?"none":"inline-flex"}>
+                        <CircularProgress variant="determinate" 
+                          value={upload} />
+                            <Box
+                                bottom={0}
+                                right={0}
+                                top={0}
+                                justifyContent="center"
+                                left={0}
+                                display="flex"
+                                alignItems="center"
+                                position="absolute"
+                                >
+                                {`${upload}%`}
+                            </Box>
+                    </Box>
                     <div className="input-group mb-3 send-text">
                         <input type="text" className="form-control send" placeholder="Write your message" onChange={(e)=>setMessageToBeSent(e.target.value)} value={messageToBeSent}/>
                         <img src={attach} alt="attach" onClick={()=>setAttachment(true)} className="attach-send"/>
