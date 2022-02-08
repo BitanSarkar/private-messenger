@@ -3,7 +3,7 @@
     padding: 5px;
     border-radius: 0.5em;
     margin-bottom: 2px;
-    width: 70%;
+    width: 80%;
 }
 
 .me {
@@ -11,8 +11,8 @@
     margin-bottom: 2px;
     padding: 5px;
     border-radius: 0.5em;
-    width: 70%;
-    margin-left: 30%;
+    width: 80%;
+    margin-left: 20%;
 }
 
 .name-container {
@@ -30,16 +30,16 @@
 
 .image-container {
     margin-left: 1em;
-    width: 70%;
+    width: 80%;
 }
 
 .audio-container {
     margin-left: 1em;
-    width: 70%;
+    width: 80%;
 }
 .video-container {
     margin-left: 1em;
-    width: 70%;
+    width: 80%;
     height: 20%;
 }
 

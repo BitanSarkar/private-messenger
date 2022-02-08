@@ -20,15 +20,15 @@ const CustomChat = ({name, message, chatName, time, fileUrl, fileName, type, roo
                                                     )}
                                                 >{message}</Linkify></div>
         {message==="" && type.split('/')[0]==='image'?<div className="image-container">
-            <img   src={fileUrl} alt="Images" width={0.45*width}/>
+            <img   src={fileUrl} alt="Images" width={0.52*width}/>
             <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'   style={{fontSize:"0.65em"}}>download</a>
         </div>:<></>}
         {message==="" && type.split('/')[0]==='audio'?<div className="audio-container">
-            <audio     controls={true} style={{width: 0.45*width, height: 0.2*0.45*width}} src={fileUrl}/>
+            <audio     controls={true} style={{width: 0.52*width, height: 0.2*0.52*width}} src={fileUrl}/>
             <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'   style={{fontSize:"0.65em"}}>download</a>
         </div>:<></>}
         {message==="" && type.split('/')[0]==='video'?<div className="video-container">
-            <video   controls={true} style={{width: 0.45*width, height: 0.318195*width}} src={fileUrl}/>
+            <video   controls={true} style={{width: 0.52*width, height: 0.318195*width}} src={fileUrl}/>
             <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'   style={{fontSize:"0.65em"}}>download</a>
         </div>:<></>}
         {message==="" && type!==null && type.split('/')[0]!=='video' && type.split('/')[0]!=='audio' && type.split('/')[0]!=='image'?<div className="audio-container">
@@ -47,15 +47,15 @@ const CustomChat = ({name, message, chatName, time, fileUrl, fileName, type, roo
                                                     )}
                                                 >{message}</Linkify></div>
         {message==="" && type.split('/')[0]==='image'?<div className="image-container">
-            <img   src={fileUrl} alt="Images" width={0.45*width}/>
+            <img   src={fileUrl} alt="Images" width={0.52*width}/>
             <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'   style={{fontSize:"0.65em"}}>download</a>
         </div>:<></>}
         {message==="" && type.split('/')[0]==='audio'?<div className="audio-container">
-            <audio     controls={true} style={{width: 0.45*width, height: 0.2*0.45*width}} src={fileUrl}/>
+            <audio     controls={true} style={{width: 0.52*width, height: 0.2*0.52*width}} src={fileUrl}/>
             <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'   style={{fontSize:"0.65em"}}>download</a>
         </div>:<></>}
         {message==="" && type.split('/')[0]==='video'?<div className="video-container">
-            <video   controls={true} style={{width: 0.45*width, height: 0.318195*width}} src={fileUrl}/>
+            <video   controls={true} style={{width: 0.52*width, height: 0.318195*width}} src={fileUrl}/>
             <a href={`${baseUrl}/chat/${roomId}/download/${fileName}`} target='_blank'   style={{fontSize:"0.65em"}}>download</a>
         </div>:<></>}
         {message==="" && type!==null && type.split('/')[0]!=='video' && type.split('/')[0]!=='audio' && type.split('/')[0]!=='image'?<div className="audio-container">

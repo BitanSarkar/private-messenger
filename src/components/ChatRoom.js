@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router";
 import { baseUrl } from "../constants";
 import SockJsClient from 'react-stomp';
@@ -150,13 +150,13 @@ const ChatRoom = () => {
                         <div className="col-4">{owner?<button className="btn btn-primary delete-room" onClick={deleteRoom}> Delete Room</button>:<></>}</div>
                     </div>
 
+
                     <div className="messages-container" id="message-container"> 
                         {allMessages.map( m => 
                             <CustomChat key={Math.floor(Math.random()*10000000)} name={m.name} message={m.message} chatName={localStorage.getItem("name")} time={m.timeStamp} fileUrl={m.fileUrl} fileName={m.fileName} type={m.type} roomId={roomId}/>
                         )}
                         <AlwaysScrollToBottom />
                     </div>
-
 
 
                     <Popup className="pop-up-chat" open={sessionExpired} closeOnDocumentClick={false} position="center">
@@ -186,12 +186,12 @@ const ChatRoom = () => {
                                     }
                                 })
                                 .then(response => {
+                                    setUpload(0);
                                     if(response.status === 200){
                                         NotificationManager.success('File added successfully', '');
                                     }
                                     else
                                         throw new Error("File upload failed")
-                                    setUpload(0);
                                 })
                                 .catch(e=>{
                                     NotificationManager.warning('Some error happed', '', 1000)
@@ -200,7 +200,7 @@ const ChatRoom = () => {
                         />
                     </Popup>
                     <div className="input-group mb-3 send-text">
-                        <input type="text" className="form-control send" placeholder="Write your message" onChange={(e)=>setMessageToBeSent(e.target.value)} value={messageToBeSent}/>
+                        <input type="text" className="form-control send" placeholder="Write your message..." onChange={(e)=>setMessageToBeSent(e.target.value)} value={messageToBeSent}/>
                         <img src={attach} alt="attach" onClick={()=>setAttachment(true)} className="attach-send"/>
                         <img src={send} alt="send" onClick={sendMessage} className="button-send"/>
                     </div>
